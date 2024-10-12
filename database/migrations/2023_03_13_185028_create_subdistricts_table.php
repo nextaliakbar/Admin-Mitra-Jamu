@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('subdistricts', function (Blueprint $table) {
             $table->integer('subdistrict_id')->primary();
-            $table->unsignedBigInteger('city_id');
+            $table->integer('city_id');
             $table->foreign('city_id')->references('city_id')->on('cities');
             $table->string('name')->nullable();
             $table->timestamps();

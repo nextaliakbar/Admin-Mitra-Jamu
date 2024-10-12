@@ -31,9 +31,10 @@ class DatabaseSeeder extends Seeder
             // ProvinceSeeder::class,
             // CitySeeder::class,
             // SubdistrictSeeder::class,
-            SymptomSeeder::class,
             PestDiseaseSeeder::class,
+            ConditionSeeder::class,
             RuleSeeder::class,
+            SymptomSeeder::class,
             RuleSymptomSeeder::class,
         ]);
     }

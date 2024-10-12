@@ -14,7 +14,7 @@ class PestDiseaseSeeder extends Seeder
      */
     public function run()
     {
-        PestDisease::truncate();
+        // PestDisease::truncate();
         $csvData = fopen(base_path('database/seeders/csv/pest_diseases.csv'), 'r');
         $header = fgetcsv($csvData);
         while ($row = fgetcsv($csvData)) {

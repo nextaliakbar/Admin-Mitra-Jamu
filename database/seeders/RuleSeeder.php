@@ -14,7 +14,7 @@ class RuleSeeder extends Seeder
      */
     public function run()
     {
-        Rule::truncate();
+        // Rule::truncate();
         $csvData = fopen(base_path('database/seeders/csv/rules.csv'), 'r');
         $header = fgetcsv($csvData);
         while ($row = fgetcsv($csvData)) {
