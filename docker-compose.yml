@@ -1,0 +1,40 @@
+version: '3.7'
+services:
+ 
+  #PHP Service
+  ecommerce-mji-laravel:
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    image: registry.gitlab.com/gs-technology/mitra-jamur-indonesia/ecommerce-be
+    container_name: ecommerce-mji-laravel
+    restart: unless-stopped
+    tty: true
+    working_dir: /var/www/
+    ports:
+      - "8013:8013"
+    volumes:
+      - ./:/var/www/
+      - ./docker/php/laravel.ini:/usr/local/etc/php/conf.d/laravel.ini
+    networks:
+      - ecommerce-mji-network
+ 
+  #Nginx Service
+  ecommerce-mji-nginx:
+    image: nginx:latest
+    container_name: ecommerce-mji-nginx
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "8003:80"
+      - "9443:443"
+    volumes:
+      - ./:/var/www/
+      - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
+    networks:
+      - ecommerce-mji-network
+
+#Docker Networks
+networks:
+  ecommerce-mji-network:
+    driver: bridge

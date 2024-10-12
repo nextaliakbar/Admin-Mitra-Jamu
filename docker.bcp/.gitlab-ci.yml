@@ -1,0 +1,31 @@
+stages:
+  - production
+
+deploy:
+  stage: production
+  environment:
+    name: production
+  only:
+    - main
+  variables:
+    VAR_DIREKTORI: '/home/aplikasi/simop/www'
+    VAR_GIT_URL_TANPA_HTTP: 'gitlab.com/mitra-jamur/backoffice.git'
+    VAR_CLONE_KEY: 'glpat-UcXBGepEHsQCvBY6ng2K'
+    VAR_USER: 'deployermj'
+    VAR_IP: '159.65.7.57'
+
+  before_script:
+    - 'which ssh-agent || ( apt-get install openssh-client )'
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan $VAR_IP >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+
+  script:
+    - ssh $VAR_USER@$VAR_IP "git config --global safe.directory '*'"
+    - ssh $VAR_USER@$VAR_IP "if [ ! -d $VAR_DIREKTORI/.git ]; then echo 'Project belum ditemukan di direktori $VAR_DIREKTORI' && cd $VAR_DIREKTORI && git clone https://oauth2:$VAR_CLONE_KEY@$VAR_GIT_URL_TANPA_HTTP .; fi"
+    - ssh $VAR_USER@$VAR_IP "cd $VAR_DIREKTORI && git pull origin main && exit"
+    - echo "DEPLOYED TO PRODUCTION!"

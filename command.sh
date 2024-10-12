@@ -1,0 +1,1 @@
+docker pull registry.gitlab.com/gs-technology/mitra-jamur-indonesia/ecommerce-fe:latest; cd ~; cd /home/gstechnology/applications/mitra-jamur-indonesia/ecommerce-be; docker-compose up -d; docker exec -it ecommerce-mji-laravel bash; php artisan key:generate; php artisan optimize; php artisan optimize:clear; php artisan storage:link;

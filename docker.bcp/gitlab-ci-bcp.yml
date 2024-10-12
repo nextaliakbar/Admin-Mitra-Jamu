@@ -1,0 +1,57 @@
+image: docker:latest
+
+services:
+  - docker:dind
+
+before_script:
+  - uname -a  # add this line to print system information
+  - apk add --no-cache py-pip postgresql-dev
+  - pip install docker-compose
+
+deploy:
+  stage: deploy
+  environment:
+    name: production
+  only:
+    - main
+  variables:
+    DB_CONNECTION: "$PROD_DB_CONNECTION"
+    DB_HOST: "$PROD_DB_HOST"
+    DB_PORT: "$PROD_DB_PORT"
+    DB_DATABASE: "$PROD_DB_DATABASE"
+    DB_USERNAME: "$PROD_DB_USERNAME"
+    DB_PASSWORD: "$PROD_DB_PASSWORD"
+    APP_NAME: "$APP_NAME"
+    APP_DEBUG: "$APP_DEBUG"
+    APP_ENV: "$APP_ENV"
+  script:
+    - cp .env.example .env
+    - docker-compose up --build -d
+    - docker-compose exec app composer install
+    - docker-compose exec app php artisan key:generate
+    - docker-compose exec app php artisan optimize
+    - docker-compose exec app php artisan optimize:clear
+
+staging:
+  stage: deploy
+  environment:
+    name: staging
+  only:
+    - develop
+  variables:
+    DB_CONNECTION: "$DEV_DB_CONNECTION"
+    DB_HOST: "$DEV_DB_HOST"
+    DB_PORT: "$DEV_DB_PORT"
+    DB_DATABASE: "$DEV_DB_DATABASE"
+    DB_USERNAME: "$DEV_DB_USERNAME"
+    DB_PASSWORD: "$DEV_DB_PASSWORD"
+    APP_NAME: "$APP_NAME"
+    APP_DEBUG: "$APP_DEBUG"
+    APP_ENV: "$APP_ENV"
+  script:
+    - cp .env.example .env
+    - docker-compose up --build -d
+    - docker-compose exec app composer install
+    - docker-compose exec app php artisan key:generate
+    - docker-compose exec app php artisan optimize
+    - docker-compose exec app php artisan optimize:clear
