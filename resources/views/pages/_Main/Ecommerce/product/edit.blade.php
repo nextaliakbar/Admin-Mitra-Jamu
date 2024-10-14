@@ -61,7 +61,7 @@
                     <label for="productThumnail">
                       Thumbnail Produk <span class="text-danger">*</span>
                     </label>
-                    <input id="pathThumbnail" name="path" type="text" value="{{ $product->thumbnail }}">
+                    <input id="pathThumbnail" name="path" type="text" value="{{ $product->thumbnail }}" style="display: none">
                     <input class="filepond" id="thumbnail-pond" name="media" type="file" />
                   </div>
                 </div>
@@ -123,7 +123,7 @@
                     <label for="productStock">
                       Foto Produk <span class="text-danger">*</span>
                     </label>
-                    <input id="pathProductImage" name="path" type="text" value="{{ $arrProductImages }}">
+                    <input id="pathProductImage" name="path" type="text" value="{{ $arrProductImages }}" style="display: none">
                     <input class="filepond" id="productImage-pond" name="media[]" type="file" multiple />
                   </div>
                 </div>

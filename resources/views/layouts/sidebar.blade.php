@@ -55,7 +55,7 @@
         @endcan
 
         @can('view-forecast')
-          <li>
+          <li style="display: none">
             <a class="waves-effect" href="{{ route('admin.forecasting.index') }}">
               <i class="bx bx-stats"></i>
               <span key="t-forecast">Forecasting</span>
@@ -128,7 +128,7 @@
         @endcan
 
         @can('view-manajemen-penjualan')
-          <li>
+          <li style="display: none">
             <a class="waves-effect" href="{{ route('admin.custom-transaction.index') }}">
               <i class="bx bx-extension"></i>
               <span key="t-stock">Manajemen Penjualan</span>
@@ -228,11 +228,11 @@
         @if (auth()->user()->can('view-expert-system-symptom') ||
                 auth()->user()->can('view-expert-system-pestdisease') ||
                 auth()->user()->can('view-expert-system-rulebase'))
-          <li class="menu-title" key="t-apps">@lang('translation.Expert_System')</li>
+          <li class="menu-title" key="t-apps" style="display: none">@lang('translation.Expert_System')</li>
         @endif
 
         @can('view-expert-system-symptom')
-          <li>
+          <li style="display: none">
             <a class="waves-effect" href="{{ route('admin.symptoms.index') }}">
               <i class="bx bx-file"></i>
               <span key="t-cash-flow">@lang('translation.Expert_System_Symptom')</span>
@@ -241,7 +241,7 @@
         @endcan
 
         @can('view-expert-system-pestdisease')
-          <li>
+          <li style="display: none">
             <a class="waves-effect" href="{{ route('admin.pest-diseases.index') }}">
               <i class="bx bx-file"></i>
               <span key="t-cash-flow">@lang('translation.Expert_System_PestDisease')</span>
@@ -250,7 +250,7 @@
         @endcan
 
         @can('view-expert-system-rulebase')
-          <li>
+          <li style="display: none">
             <a class="waves-effect" href="{{ route('admin.rules.index') }}">
               <i class="bx bx-file"></i>
               <span key="t-cash-flow">@lang('translation.Expert_System_RuleBase')</span>
@@ -261,7 +261,7 @@
         @if (auth()->user()->can('view-expert-system-symptom') ||
                 auth()->user()->can('view-expert-system-pestdisease') ||
                 auth()->user()->can('view-expert-system-rulebase'))
-          <li>
+          <li style="display: none">
             <a class="waves-effect" href="{{ route('admin.diagnoses.history') }}">
               <i class="bx bx-file"></i>
               <span key="t-cash-flow">History Diagnosis</span>

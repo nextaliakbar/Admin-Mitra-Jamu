@@ -70,7 +70,7 @@
                                id="table-show">
                             <thead>
                                 <tr>
-                                    <th>No.</th>
+                                    <th>No</th>
                                     <th>Kode</th>
                                     <th>Label</th>
                                     <th>Deskripsi</th>
