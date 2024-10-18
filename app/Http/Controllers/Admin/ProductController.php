@@ -257,7 +257,7 @@ class ProductController extends Controller
             ->orderBy('product_images.created_at', 'ASC')
             ->get();
 
-        // related products by category 
+        // related products by category
         $relatedProducts = DB::table('products')
             ->join('product_categories', 'products.product_category_id', '=', 'product_categories.id')
             ->join('product_labels', 'products.product_label_id', '=', 'product_labels.id')

@@ -31,7 +31,8 @@ class HomeController extends Controller
     $failed = Transaction::where('status', 'pembayaran gagal')->count();
 
     // get count of all products
-    $products = DB::table('products')->count();
+//    $products = DB::table('products')->count();
+      $products = DB::table('products')->whereNull('deleted_at')->count();
 
     // get count of all customers
     $customers = DB::table('customers')->count();

@@ -7,8 +7,10 @@ use App\Models\CashFlow;
 use App\Models\Debt;
 use App\Models\Product;
 use App\Models\Purchase;
+use App\Models\PurchaseList;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PurchaseController extends Controller
 {
@@ -102,8 +104,30 @@ class PurchaseController extends Controller
         );
     }
 
-    public function show()
+    public function show($id)
     {
+      $purchase_lists = DB::table('purchase_lists')
+        ->join('products', 'purchase_lists.product_id', '=', 'products.id')
+        ->join('suppliers', 'purchase_lists.supplier_id', '=', 'suppliers.id')
+        ->join('purchases', 'purchase_lists.purchase_id', '=', 'purchases.id')
+        ->where('purchase_lists.purchase_id', $id)
+        ->select(
+          'purchase_lists.date as date',
+                  'purchase_lists.unit_cost as unit_cost',
+                  'purchase_lists.quantity as quantity',
+                  'purchase_lists.total_cost as total_cost',
+                  'suppliers.name as supplier_name',
+                  'products.id as product_id',
+                  'products.name as product_name',
+                  'purchases.invoice as invoice',
+                  'purchases.payment_status as payment_status',
+                  'purchases.payment_method as payment_method',
+                  'purchases.date as payment_date',
+                  'purchases.note as note',
+        )
+        ->get();
+
+      return view('pages._Main.Purchase.detail', compact('purchase_lists'));
     }
 
     public function update()

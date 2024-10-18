@@ -16,6 +16,7 @@ class ProductController extends Controller
             ->join('product_labels', 'products.product_label_id', '=', 'product_labels.id')
             ->leftjoin('orders', 'orders.product_id', '=', 'products.id')
             ->leftjoin('reviews', 'reviews.order_id', '=', 'orders.id')
+            ->whereNull('products.deleted_at')
             ->select(
                 'products.*',
                 'product_categories.name as category_name',

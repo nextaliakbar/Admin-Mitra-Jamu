@@ -56,7 +56,6 @@ class CheckoutController extends Controller
 
     public function checkout(Request $request)
     {
-
         $checkout = DB::transaction(function () use ($request) {
             $invoice_number = generateInvoiceNumber('ECM');
 

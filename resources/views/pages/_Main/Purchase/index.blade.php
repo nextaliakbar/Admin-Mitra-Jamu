@@ -60,10 +60,14 @@
                       <td> <span class="badge bg-soft-danger text-danger">Belum Lunas</span> </td>
                     @endif
                     <td>
-                      <button class="btn btn-primary waves-effect waves-light btn-sm editPurchase" data-bs-toggle="modal"
-                        data-bs-target="#editPurchaseModal" type="button" onclick="invoice('{{ $purchase->id }}')">
+{{--                      <button class="btn btn-primary waves-effect waves-light btn-sm editPurchase" data-bs-toggle="modal"--}}
+{{--                        data-bs-target="#editPurchaseModal" type="button" onclick="invoice('{{ $purchase->id }}')">--}}
+{{--                        <i class="bx bx-detail"></i> Detail--}}
+{{--                      </button>--}}
+                      <a class="btn btn-primary waves-effect waves-light btn-sm detailProduct" type="button"
+                         href="{{ route('admin.purchases.show', $purchase->id) }}">
                         <i class="bx bx-detail"></i> Detail
-                      </button>
+                      </a>
                     </td>
                   </tr>
                 @endforeach
