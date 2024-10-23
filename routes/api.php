@@ -25,6 +25,7 @@ Route::group(['prefix' => 'auth'], function () {
 
 Route::group(['prefix' => 'product'], function () {
     Route::get('list', [App\Http\Controllers\Api\ProductController::class, 'list'])->name('api.product.list');
+    Route::get('filter', [App\Http\Controllers\Api\ProductController::class, 'filter'])->name('api.product.filter');
     Route::get('detail/{slug}', [App\Http\Controllers\Api\ProductController::class, 'detail'])->name('api.product.detail');
     Route::get('latest', [App\Http\Controllers\Api\ProductController::class, 'latestProduct'])->name('api.product.latest');
     Route::get('selected', [App\Http\Controllers\Api\ProductController::class, 'selectedProduct'])->name('api.product.selected');

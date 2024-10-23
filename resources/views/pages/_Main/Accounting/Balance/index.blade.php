@@ -56,12 +56,12 @@
       <div class="card">
         <div class="card-body">
           <div class="card-title">
-            <div class="d-flex justify-content-end">
-              <button class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal"
-                data-bs-target="#addCasheModal" type="button">
-                <i class="bx bx-printer font-size-16 me-2 align-middle"></i> Cetak
-              </button>
-            </div>
+{{--            <div class="d-flex justify-content-end">--}}
+{{--              <button class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal"--}}
+{{--                data-bs-target="#addCasheModal" type="button">--}}
+{{--                <i class="bx bx-printer font-size-16 me-2 align-middle"></i> Cetak--}}
+{{--              </button>--}}
+{{--            </div>--}}
           </div>
           <h4 style="text-align:center"><b>Laporan Posisi Keuangan (Neraca)</b></h4>
           <div id="table">

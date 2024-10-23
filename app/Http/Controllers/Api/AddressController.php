@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Address;
+use App\Models\City;
 use App\Models\Customer;
+use App\Models\Province;
+use App\Models\Subdistrict;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -77,7 +80,12 @@ class AddressController extends Controller
                 'label'          => $request->label,
                 'name'          => $request->name,
                 'phone'         => $request->phone,
+                'province_id'   => $request->province_id,
+                'province_name' => $request->province_name,
+                'city_id'       => $request->city_id,
+                'city_name'     => $request->city_name,
                 'subdistrict_id' => $request->subdistrict_id,
+                'subdistrict_name' => $request->subdistrict_name,
                 'address'       => $request->address,
                 'postal_code'   => $request->postal_code,
                 'pinpoint'      => $request->pinpoint,
@@ -90,7 +98,12 @@ class AddressController extends Controller
                 'label'          => $request->label,
                 'name'          => $request->name,
                 'phone'         => $request->phone,
+                'province_id'   => $request->province_id,
+                'province_name' => $request->province_name,
+                'city_id'       => $request->city_id,
+                'city_name'     => $request->city_name,
                 'subdistrict_id' => $request->subdistrict_id,
+                'subdistrict_name' => $request->subdistrict_name,
                 'address'       => $request->address,
                 'postal_code'   => $request->postal_code,
                 'pinpoint'      => $request->pinpoint,
@@ -124,7 +137,12 @@ class AddressController extends Controller
                 'label'          => $request->label,
                 'name'          => $request->name,
                 'phone'         => $request->phone,
+                'province_id'   => $request->province_id,
+                'province_name' => $request->province_name,
+                'city_id'       => $request->city_id,
+                'city_name'     => $request->city_name,
                 'subdistrict_id' => $request->subdistrict_id,
+                'subdistrict_name' => $request->subdistrict_name,
                 'address'       => $request->address,
                 'postal_code'   => $request->postal_code,
                 'pinpoint'      => $request->pinpoint,
@@ -136,7 +154,12 @@ class AddressController extends Controller
                 'label'          => $request->label,
                 'name'          => $request->name,
                 'phone'         => $request->phone,
+                'province_id'   => $request->province_id,
+                'province_name' => $request->province_name,
+                'city_id'       => $request->city_id,
+                'city_name'     => $request->city_name,
                 'subdistrict_id' => $request->subdistrict_id,
+                'subdistrict_name' => $request->subdistrict_name,
                 'address'       => $request->address,
                 'postal_code'   => $request->postal_code,
                 'pinpoint'      => $request->pinpoint,
@@ -167,22 +190,9 @@ class AddressController extends Controller
 
     public function detailAddress($id)
     {
-        $address = DB::table('addresses')
-            ->join('subdistricts', 'subdistricts.subdistrict_id', '=', 'addresses.subdistrict_id')
-            ->join('cities', 'cities.city_id', '=', 'subdistricts.city_id')
-            ->join('provinces', 'provinces.province_id', '=', 'cities.province_id')
-            ->select(
-                'addresses.*',
-                'subdistricts.name as subdistrict_name',
-                'subdistricts.subdistrict_id as subdistrict_id',
-                'cities.name as city_name',
-                'cities.city_id as city_id',
-                'provinces.name as province_name',
-                'provinces.province_id as province_id',
-            )
-            ->where('addresses.id', $id)
-            ->where('addresses.customer_id', auth()->guard('api')->user()->id)
-            ->first();
+        $address = DB::table('addresses')->where('id', $id)
+        ->where('addresses.customer_id', auth()->guard('api')->user()->id)
+        ->first();
 
         return response()->json([
             'success' => true,

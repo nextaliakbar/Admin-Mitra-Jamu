@@ -64,8 +64,8 @@ class CheckoutController extends Controller
                 'customer_id'       => auth()->guard('api')->user()->id,
                 'payment_method'    => 'online_payment',
                 'shipping_method'   => $request->shipping_method,
-                'courier'           => explode(' - ', $request->courier)[0],
-                'courier_service'   => explode(' - ', $request->courier)[1],
+                'courier'           => $request->shipping_method === 'cac' ? null : explode(' - ', $request->courier)[0],
+                'courier_service'   => $request->shipping_method === 'cac' ? null : explode(' - ', $request->courier)[1],
                 'courier_cost'      => $request->courier_cost,
                 'weight'            => $request->weight,
                 'total_price'       => $request->total_price,
@@ -76,6 +76,7 @@ class CheckoutController extends Controller
                 'notes'             => $request->notes,
                 'status'            => 'Menunggu Pembayaran',
             ]);
+
 
             $carts = Cart::where('customer_id', auth()->guard('api')->user()->id)->get();
             foreach ($carts as $cart) {
@@ -109,7 +110,7 @@ class CheckoutController extends Controller
                         'email'         => auth()->guard('api')->user()->email,
                         'phone'         => auth()->guard('api')->user()->phone,
                         'address'       => $address->address,
-                        'city'          => $address->subdistrict->city->name,
+                        'city'          => $address->city_name,
                         'postal_code'   => $address->postal_code,
                         'country_code'  => 'IDN'
                     ]

@@ -40,7 +40,7 @@
                   <th>#</th>
                   <th>Kode</th>
                   <th>Nama</th>
-                  <th>Gambar</th>
+{{--                  <th>Gambar</th>--}}
                   <th>Harga</th>
                   <th>Stok</th>
                   <th>Status</th>
@@ -54,14 +54,14 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $item->id }}</td>
                     <td>{{ $item->name }}</td>
-                    <td>
-                      <button class="btn btn-sm btn-primary" type="button">
-                        Lihat thumbnail
-                      </button>
-                      <button class="btn btn-sm btn-primary" type="button">
-                        Lihat Gambar Produk
-                      </button>
-                    </td>
+{{--                    <td>--}}
+{{--                      <button class="btn btn-sm btn-primary" type="button">--}}
+{{--                        Lihat thumbnail--}}
+{{--                      </button>--}}
+{{--                      <button class="btn btn-sm btn-primary" type="button">--}}
+{{--                        Lihat Gambar Produk--}}
+{{--                      </button>--}}
+{{--                    </td>--}}
                     <td>
                       {{ moneyFormat($item->price) }}
                     </td>

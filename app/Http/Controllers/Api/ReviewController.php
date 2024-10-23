@@ -77,6 +77,7 @@ class ReviewController extends Controller
         }
 
         Review::create([
+            'title' => $request->title,
             'order_id'    => $request->order_id,
             'rating'      => $request->rating,
             'review'      => $request->review

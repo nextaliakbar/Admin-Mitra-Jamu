@@ -20,8 +20,12 @@ return new class extends Migration
             $table->string('label')->nullable();
             $table->string('name')->nullable();
             $table->string('phone')->nullable();
+            $table->integer('province_id')->nullable();
+            $table->string('province_name')->nullable();
+            $table->integer('city_id')->nullable();
+            $table->string('city_name')->nullable();
             $table->integer('subdistrict_id')->nullable();
-            $table->foreign('subdistrict_id')->references('subdistrict_id')->on('subdistricts');
+            $table->string('subdistrict_name')->nullable();
             $table->text('address')->nullable();
             $table->string('postal_code')->nullable();
             $table->string('pinpoint')->nullable();
